@@ -22,9 +22,12 @@ var m = require('mithril')
 var TourComponent = require('mithril-tour-component')
 ```
 
+**Note:** [lib/styles/tour.css](lib/styles/tour.css) is also required.
+
 **Browser**
 
 ```html
+<link href="path/to/mithril-tour-component/lib/styles/tour.css" rel="stylesheet" />
 <script src="path/to/mithril.js" type="text/javascript"></script>
 <script src="path/to/mithril-tour-component/build/tour.min.js" type="text/javascript"></script>
 ```
