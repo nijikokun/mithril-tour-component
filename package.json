@@ -1,0 +1,32 @@
+{
+  "name": "mithril-tour-component",
+  "version": "1.0.0",
+  "description": "Tour Guide Component for Mithril.js",
+  "main": "tour.js",
+  "scripts": {
+    "test": "npm test",
+    "build": "browserify index.js --standalone Tour > build/tour.js ; browserify index.js --standalone Tour | uglifyjs > build/tour.min.js"
+  },
+  "keywords": [
+    "component",
+    "mithril",
+    "react",
+    "tour",
+    "indicator",
+    "webcomponent",
+    "guide",
+    "help",
+    "guided",
+    "hand",
+    "helper",
+    "tooltip",
+    "information",
+    "steps"
+  ],
+  "author": "Nijiko Yonskai <nijikokun@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "debounce": "^1.0.0",
+    "mithril": "^0.2.0"
+  }
+}

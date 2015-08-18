@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<meta name="robots" content="noindex">
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Mithril Tour Guide Example</title>
+  <style>body { width: 100%; height: 2000px; padding: 50px; font-family: 'Helvetica Neue'; }</style>
+  <link href="./lib/styles/tour.css" rel="stylesheet" />
+  <script src="https://cdn.rawgit.com/lhorie/mithril.js/next/mithril.js"></script>
+  <script src="./build/tour.js"></script>
+</head>
+<body>
+  <h1>Mithril Tour Guide Component Example</h1>
+  <p class='sources'>
+    <a href="https://github.com/Nijikokun/mithril-tour-component">View on Github</a>
+  </p>
+  <div id="example"></div>
+  <script>
+    var tour = Tour({}, [{
+      id: 1,
+      element: {
+        selector: '.rotate-button',
+        position: 'right',
+        offset: { x: 5, y: 10 }
+      },
+
+      tooltip: {
+        content: [
+          m('p', 'Rotate list of links when clicked, give it a whirl!')
+        ],
+        footer: {
+          skipText: 'Been here before? ',
+          skipLinkText: 'Yes, disable tour!',
+          dismissText: 'Thanks!'
+        }
+      }
+    }, {
+      id: 2,
+      element: {
+        selector: '.sources a',
+        position: 'right'
+      },
+      tooltip: {
+        content: [
+          m('p', 'Here you can download, learn, and star / fork this library!')
+        ]
+      }
+    }])
+
+    var Page = {
+    	list: function() {
+    		return m.prop([
+          { url:'', title: 'Don Quixote - Miguel De Cervantes' },
+          { url:'', title: 'Guilliver\'s Travels - Johnathan Swift' },
+          { url:'', title: 'To Kill A Mockingbird - Harper Lee' }
+        ])
+    	}
+    }
+
+    var Demo = {
+    	controller: function () {
+    		var pages = Page.list()
+    		return {
+          tour: tour,
+    			pages: pages,
+    			rotate: function() {
+    				pages().push(pages().shift())
+    			}
+    		}
+    	},
+
+    	//view
+    	view: function(ctrl) {
+        return m("div", [
+          ctrl.pages().map(function(page) {
+            return m('li', m("a", {href: page.url}, page.title))
+          }),
+
+          m("button.rotate-button", {onclick: ctrl.rotate}, "Rotate links"),
+          ctrl.tour
+        ])
+    	}
+    }
+
+    m.mount(document.getElementById("example"), Demo);
+  </script>
+</body>
+</html>
