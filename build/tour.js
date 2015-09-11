@@ -155,17 +155,31 @@ function Tour (settings, indicators) {
   }).map(function TourIndicatorMap (props, index) {
     props.id = props.key || index
 
-    var onskip = settings.onskip || props.onskip || props.onSkip || noop
+    var onskip = props.onskip || props.onSkip || settings.onskip || settings.onSkip || noop
     props.onskip = function TourOnSkip (e) {
       skipped = true
       onskip(e, props.id)
     }
 
-    var ondismiss = settings.ondismiss || props.ondismiss || props.onDismiss || noop
+    var ondismiss = props.ondismiss || props.onDismiss || settings.ondismiss || settings.onDismiss || noop
     props.ondismiss = function TourOnDismiss (e) {
       dismissed[props.id] = true
       ondismiss(e, props.id)
     }
+
+    props.x = typeof props.x === 'number'
+      ? props.x
+      : typeof settings.x === 'number'
+      ? settings.x
+      : null
+
+    props.y = typeof props.y === 'number'
+      ? props.y
+      : typeof settings.y === 'number'
+      ? settings.y
+      : null
+
+    props.footer = props.footer || settings.footer || null
 
     return Tour.indicator(props)
   })
@@ -216,6 +230,13 @@ function outerWidth (el) {
 }
 
 function offsets (element) {
+  if (!element) {
+    return {
+      top: -99999,
+      left: -99999
+    }
+  }
+
   var rect = element.getBoundingClientRect()
   return {
     top: rect.top + document.body.scrollTop,
@@ -229,8 +250,8 @@ module.exports = function calculatePosition (element, options) {
   var offset = offsets(target)
   var offsetX = options.offset ? options.offset.x : 5
   var offsetY = options.offset ? options.offset.y : 10
-  var targetWidth = outerWidth(target)
-  var targetHeight = target.offsetHeight
+  var targetWidth = target ? outerWidth(target) : 0
+  var targetHeight = target ? target.offsetHeight : 0
   var boundTop = window.pageXOffset
   var boundLeft = window.pageYOffset
   var boundRight = boundLeft + window.outerWidth
