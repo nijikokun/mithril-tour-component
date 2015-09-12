@@ -259,23 +259,23 @@ module.exports = function calculatePosition (element, options) {
 
   var positions = {
     'top left': {
-      x: offset.top,
-      y: offset.left
+      x: offset.top - offsetY,
+      y: offset.left - offsetX
     },
 
     'top right': {
-      x: offset.top,
-      y: offset.left + targetWidth
+      x: offset.top - offsetY,
+      y: offset.left + targetWidth - offsetX
     },
 
     'top': {
-      x: offset.top,
+      x: offset.top - offsetY,
       y: offset.left + (targetWidth / 2) - (offsetX / 2)
     },
 
     'bottom left': {
       x: offset.top + targetHeight - offsetY,
-      y: offset.left
+      y: offset.left - offsetX
     },
 
     'bottom right': {
@@ -290,7 +290,7 @@ module.exports = function calculatePosition (element, options) {
 
     'left': {
       x: offset.top + (targetHeight / 2) - (offsetY / 2),
-      y: offset.left
+      y: offset.left - offsetX
     },
 
     'right': {
