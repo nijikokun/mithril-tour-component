@@ -1,6 +1,6 @@
 {
   "name": "mithril-tour-component",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Tour Guide Component for Mithril.js",
   "main": "index.js",
   "scripts": {
